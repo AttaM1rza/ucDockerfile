@@ -1,3 +1,5 @@
 # ucDockerfile
 
-run `docker build -t image1 .`
+```
+docker build -t image1 .
+```
