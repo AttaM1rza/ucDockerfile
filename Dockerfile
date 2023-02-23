@@ -30,7 +30,7 @@ RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt instal
 COPY demo.py / 
 COPY entrypoint.sh / 
 
-COPY xrdp.ini in /etc/xrdp/xrdp.ini 
+COPY xrdp.ini /etc/xrdp/xrdp.ini 
 
 RUN /bin/sh -c sed -i "s@version_main=None@version_main=108@g" /usr/local/lib/python3.11/site-packages/undetected_chromedriver/__init__.py
 
