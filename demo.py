@@ -4,6 +4,9 @@ import subprocess
 import time
 import undetected_chromedriver as uc
 
+sleepTime = 5
+url = "https://nowsecure.nl/#relax"
+url = "https://www.zara.com/de/de/jacke-aus-kunstleder-p08281450.html?v1=222756772"
 
 logging.basicConfig(level=10)
 logging.getLogger("parso").setLevel(100) # i hate damn parso
@@ -11,10 +14,10 @@ logging.getLogger("parso").setLevel(100) # i hate damn parso
 #o = uc.ChromeOptions()
 #o.arguments.extend(["--no-sandbox", "--disable-setuid-sandbox"])  # these are needed to run chrome as root
 driver = uc.Chrome(advanced_elements=True, version_main = 110)  # driver = uc.Chrome( version_main = 108 )
-driver.get("https://nowsecure.nl/#relax")
+driver.get(url)
 
-logging.getLogger().info('sleeping 5 seconds to give site a chance to load')
-time.sleep(5) # this is only for the timing of the screenshot
+logging.getLogger().info(f'sleeping {sleepTime} seconds to give site a chance to load')
+time.sleep(sleepTime) # this is only for the timing of the screenshot
 logging.getLogger().setLevel(20)
 driver.save_screenshot("/data/nowsecure.png")
 subprocess.run(["catimg", "/data/nowsecure.png"])
