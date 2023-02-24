@@ -8,6 +8,20 @@ sleepTime = 5
 url = "https://nowsecure.nl/#relax"
 url = "https://www.zara.com/de/de/jacke-aus-kunstleder-p08281450.html?v1=222756772"
 VERSION_MAIN = 110
+WORKING_DIR = os.path.join()
+
+def saveHtmlFile(destinationDir: str, htmlResponse, openIt:bool=False):
+    filename = datetime.now().strftime('%d-%m-%Y_%H-%M-%S')
+    savePath = os.path.join(saveDir, filename)
+
+    with open(savePath, "w", encoding="utf-8") as file:
+        try:
+            file.write(htmlResponse.text)
+        except AttributeError:
+            #AttributeError: 'str' object has no attribute 'text'
+            file.write(htmlResponse)
+    if openIt:
+        webbrowser.open(savePath)
   
 logging.basicConfig(level=10)
 logging.getLogger("parso").setLevel(100)
