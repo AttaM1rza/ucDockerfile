@@ -27,7 +27,13 @@ LABEL usage="docker run -it ultrafunk/undetected-chromedriver , or  docker run -
 MAINTAINER ultrafunk
 VOLUME [/data]
 RUN /bin/sh -c DEBIAN_FRONTEND=noninteractive && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub > /usr/share/keyrings/chrome.pub             && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome.pub] http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/google-chrome.list            && apt update -y && apt install -y google-chrome-stable
-RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y x11vnc  xvfb  fluxbox  catimg  psmisc xrdp && pip install -U git+https://github.com/ultrafunkamsterdam/undetected-chromedriver@3.2.0  ipython
+RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y x11vnc
+RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y xvfb
+RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y fluxbox
+RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y catimg
+RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y psmisc
+RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y xrdp
+RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && pip install -U git+https://github.com/ultrafunkamsterdam/undetected-chromedriver@3.2.0  ipython
 
 COPY demo.py / 
 COPY entrypoint.sh / 
