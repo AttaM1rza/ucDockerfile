@@ -32,7 +32,7 @@ RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt instal
 RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y fluxbox
 RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y catimg
 RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y psmisc
-RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y xrdp keyboard-configuration
+RUN /bin/sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y xrdp
 RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && pip install -U git+https://github.com/ultrafunkamsterdam/undetected-chromedriver@3.2.0  ipython
 
 COPY demo.py / 
