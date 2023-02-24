@@ -37,7 +37,7 @@ RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && pip install -U git+https
 COPY demo.py / 
 COPY entrypoint.sh / 
 COPY xrdp.ini /etc/xrdp/xrdp.ini 
-
+RUN /bin/sh -c set -eux; find / -type d -name "python" 
 RUN /bin/sh -c set -eux; sed -i "s@version_main=None@version_main=108@g" /usr/local/lib/python3.11/site-packages/undetected_chromedriver/__init__.py
 
 ENTRYPOINT ["/entrypoint.sh"]
