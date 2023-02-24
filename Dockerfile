@@ -36,7 +36,7 @@ COPY demo.py /
 COPY entrypoint.sh / 
 COPY xrdp.ini /etc/xrdp/xrdp.ini 
 
-RUN /bin/sh -c set -eux; sed -i "s@version_main=None@version_main=108@g" /usr/local/lib/python3.11/site-packages/undetected_chromedriver/__init__.py
+RUN /bin/sh -c set -eux; sed -i "s@version_main=None@version_main=108@g" /usr/local/lib/python3.9/dist-packages/undetected_chromedriver/__init__.py
 
 RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
