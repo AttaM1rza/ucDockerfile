@@ -30,14 +30,13 @@ RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt instal
 RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y fluxbox
 RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y catimg
 RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y psmisc
-
 RUN /bin/sh -c DEBIAN_FRONTEND=noninteractive apt-get install -y xrdp
-
 RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && pip install -U git+https://github.com/ultrafunkamsterdam/undetected-chromedriver@3.2.0  ipython
 COPY demo.py / 
 COPY entrypoint.sh / 
 COPY xrdp.ini /etc/xrdp/xrdp.ini 
-RUN /bin/sh -c set -eux; find / -type d -name "python" 
+
+RUN /bin/sh -c set -eux; sed -i "s@version_main=None@version_main=108@g" /usr/local/lib/python3.11/site-packages/undetected_chromedriver/__init__.py
 
 RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
