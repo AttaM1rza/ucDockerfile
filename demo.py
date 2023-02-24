@@ -10,7 +10,7 @@ logging.getLogger("parso").setLevel(100) # i hate damn parso
 
 #o = uc.ChromeOptions()
 #o.arguments.extend(["--no-sandbox", "--disable-setuid-sandbox"])  # these are needed to run chrome as root
-driver = uc.Chrome(advanced_elements=True)
+driver = uc.Chrome(advanced_elements=True, version_main = 95)  # driver = uc.Chrome( version_main = 95 )
 driver.get("https://nowsecure.nl/#relax")
 
 logging.getLogger().info('sleeping 5 seconds to give site a chance to load')
