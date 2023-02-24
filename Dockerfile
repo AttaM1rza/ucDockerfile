@@ -20,20 +20,7 @@ ENV PYTHON_PIP_VERSION=22.3.1
 ENV PYTHON_SETUPTOOLS_VERSION=65.5.0
 ENV PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/66030fa03382b4914d4c4d0896961a0bdeeeb274/public/get-pip.py
 ENV PYTHON_GET_PIP_SHA256=1e501cf004eac1b7eb1f97266d28f995ae835d30250bec7f8850562703067dc6
-RUN /bin/sh -c set -eux; 		wget -O get-pip.py "$PYTHON_GET_PIP_URL"; 	echo "$PYTHON_GET_PIP_SHA256 *get-pip.py" | sha256sum -c -; 		export PYTHONDONTWRITEBYTECODE=1; 		python get-pip.py 		--disable-pip-version-check 		--no-cache-dir 		--no-compile 		"pip==$PYTHON_PIP_VERSION" 		"setuptools==$PYTHON_SETUPTOOLS_VERSION" 	; 	rm -f get-pip.py; 		pip --version
+RUN /bin/sh -c set -eux; 		wget -O get-pip.py "$PYTHON_GET_PIP_URL"; 	echo "$PYTHON_GET_PIP_SHA256 *get-pip.py" | sha256sum -c -; 		export PYTHONDONTWRITEBYTECODE=1; 		
+RUN /bin/sh -c set -eux;    python get-pip.py 		--disable-pip-version-check 		--no-cache-dir 		--no-compile 		"pip==$PYTHON_PIP_VERSION" 		"setuptools==$PYTHON_SETUPTOOLS_VERSION" 	; 	
+RUN /bin/sh -c set -eux;    rm -f get-pip.py; 		pip --version
 CMD ["python3"]
-LABEL usage="docker run -it ultrafunk/undetected-chromedriver , or  docker run -it -p 3389:3389  ultrafunk/undetected-chromedriver bash  - from there you can startDesktop and rdp into your container"
-MAINTAINER ultrafunk
-VOLUME [/data]
-RUN /bin/sh -c DEBIAN_FRONTEND=noninteractive && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub > /usr/share/keyrings/chrome.pub             && echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/chrome.pub] http://dl.google.com/linux/chrome/deb/ stable main' > /etc/apt/sources.list.d/google-chrome.list            && apt update -y && apt install -y google-chrome-stable
-RUN /bin/sh -c export DEBIAN_FRONTEND=noninteractive && apt update && apt install -y x11vnc  xvfb  fluxbox  catimg  psmisc xrdp && pip install -U git+https://github.com/ultrafunkamsterdam/undetected-chromedriver@3.2.0  ipython
-
-COPY demo.py / 
-COPY entrypoint.sh / 
-
-COPY xrdp.ini /etc/xrdp/xrdp.ini 
-
-RUN /bin/sh -c sed -i "s@version_main=None@version_main=108@g" /usr/local/lib/python3.11/site-packages/undetected_chromedriver/__init__.py
-
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["ipython", "demo.py"]
