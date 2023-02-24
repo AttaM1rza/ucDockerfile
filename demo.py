@@ -4,19 +4,10 @@ import subprocess
 import time
 import undetected_chromedriver as uc
 
-
-
-def getCompatibleChromeVersion():
-  str1 = driver.capabilities['browserVersion']
-  str2 = driver.capabilities['chrome']['chromedriverVersion'].split(' ')[0]
-  print(str1[0:2])
-  print(str2[0:2])
-  return int(str1[0:2])
-
 sleepTime = 5
 url = "https://nowsecure.nl/#relax"
 url = "https://www.zara.com/de/de/jacke-aus-kunstleder-p08281450.html?v1=222756772"
-VERSION_MAIN = getCompatibleChromeVersion()
+VERSION_MAIN = 110
   
 logging.basicConfig(level=10)
 logging.getLogger("parso").setLevel(100)
@@ -32,5 +23,5 @@ logging.getLogger().setLevel(20)
 driver.save_screenshot("/data/nowsecure.png")
 subprocess.run(["catimg", "/data/nowsecure.png"])
 logging.getLogger().info('screenshot saved to /data/nowsecure.png')
-input("press a key to quit")
+# input("press a key to quit")
 exit()
