@@ -39,5 +39,6 @@ COPY entrypoint.sh /
 COPY xrdp.ini /etc/xrdp/xrdp.ini 
 RUN /bin/sh -c set -eux; find / -type d -name "python" 
 
+RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["ipython", "demo.py"]
